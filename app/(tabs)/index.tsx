@@ -21,18 +21,18 @@ export default function HomePage() {
         `https://api.tatoeba.org/v1/sentences?lang=deu&trans:lang=${language}&showtrans=all&sort=random`
       );
 
-    const data = await response.json();
+      const data = await response.json();
 
-    const german = data.data[0].text;
+      const german = data.data[0].text;
 
-    const translation = data.data[0].translations.find(
-      (item: any) => item.lang === language
-    )?.text;
+      const translation = data.data[0].translations.find(
+        (item: any) => item.lang === language
+      )?.text;
 
-    setSentence({
-      german,
-      english: translation,
-    });
+      setSentence({
+        german,
+        english: translation,
+      });
     } catch (error) {
       console.error(error);
     } finally {
@@ -42,10 +42,34 @@ export default function HomePage() {
 
   return (
     <View style={style.container}>
-      {sentence && <Info sentence={sentence} />}
+      <Text style={style.title}>DeutschCards</Text>
+
+      <Text style={style.subtitle}>
+        Frases curtas para aprender Alemão.
+      </Text>
+
+      <View style={style.card}>
+        {sentence ? (
+          <Info sentence={sentence} />
+        ) : (
+          <View style={style.placeholder}>
+            <Text style={style.placeholderTitle}>
+              Your next sentence
+            </Text>
+
+            <Text style={style.placeholderText}>
+              Press the button below to get a random German sentence.
+            </Text>
+          </View>
+        )}
+      </View>
 
       <Button onPress={getSentence}>
-        <Text>Get Sentence</Text>
+        <View style={style.button}>
+          <Text style={style.buttonText}>
+            {loading ? "Loading..." : "Get Sentence"}
+          </Text>
+        </View>
       </Button>
     </View>
   );
@@ -54,8 +78,79 @@ export default function HomePage() {
 const style = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#F2F2F2",
+    paddingHorizontal: 24,
+    paddingTop: 60,
+    paddingBottom: 30,
+  },
+
+  title: {
+    fontSize: 32,
+    fontWeight: "800",
+    color: "#111111",
+    letterSpacing: -1,
+  },
+
+  subtitle: {
+    fontSize: 16,
+    color: "#555555",
+    marginTop: 6,
+    marginBottom: 35,
+  },
+
+  card: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 20,
+    padding: 24,
+
+    borderWidth: 1,
+    borderColor: "#DDDDDD",
+
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.08,
+    shadowRadius: 10,
+
+    elevation: 3,
+
     justifyContent: "center",
+  },
+
+  placeholder: {
     alignItems: "center",
-    padding: 20,
+    paddingHorizontal: 15,
+  },
+
+  placeholderTitle: {
+    fontSize: 23,
+    fontWeight: "700",
+    color: "#222222",
+    marginBottom: 10,
+    textAlign: "center",
+  },
+
+  placeholderText: {
+    fontSize: 16,
+    color: "#777777",
+    textAlign: "center",
+    lineHeight: 24,
+  },
+
+  button: {
+    backgroundColor: "#111111",
+    borderRadius: 14,
+    paddingVertical: 17,
+    alignItems: "center",
+    marginTop: 20,
+  },
+
+  buttonText: {
+    color: "#FFFFFF",
+    fontSize: 17,
+    fontWeight: "700",
   },
 });

@@ -42,10 +42,10 @@ export default function HomePage() {
 
   return (
     <View style={style.container}>
-      <Text style={style.title}>DeutschCards</Text>
+      <Text style={style.title}>🇩🇪 DeutschCards</Text>
 
       <Text style={style.subtitle}>
-        Frases curtas para aprender Alemão.
+        Short sentences to learn german.
       </Text>
 
       <View style={style.card}>

@@ -14,7 +14,7 @@ export default function Languages() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Escolha uma tradução</Text>
+      <Text style={styles.title}>Translate to...</Text>
 
       {languages.map((item) => (
         <Pressable

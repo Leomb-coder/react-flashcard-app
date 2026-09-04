@@ -1,4 +1,4 @@
-import { Tabs } from "expo-router";
+import { Tabs, Stack } from "expo-router";
 import { LanguageProvider } from "@/context/LanguageContext";
 
 export default function TabLayout() {
